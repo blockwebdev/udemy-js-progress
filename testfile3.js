@@ -134,19 +134,6 @@ const max2 = movements.reduce(function (acc, mov) {
 });
 console.log(max2 + 1);
 
-const calcAverageHumanAge = function (ages) {
-    const humanAges = ages.map(
-        age => age <= 2 ? 2 * age : 16 + age * 4
-    );
-    const adults = humanAges.filter(age => age >= 18);
-    const average = adults.reduce((acc, age) => acc
-        + age, 0) / adults.length;
-    return average;
-};
-const firstCalc = Math.floor(calcAverageHumanAge([15, 16, 18, 9, 1, 2, 3]));
-const secondCalc = calcAverageHumanAge([90, 4, 12, 7, 18, 56, 30]);
-console.log(firstCalc, secondCalc);
-
 const calcDisplaySummary = function (movements) {
     const moneyIn = movements.filter(mov => mov > 0).reduce(    // Deposits
         (acc, mov) => acc + mov, 0);
@@ -166,23 +153,6 @@ const calcDisplaySummary = function (movements) {
     labelSumInterest.textContent = `${interest}`;
 };
 calcDisplaySummary(account1.movements);
-
-
-
-const calcAverageHumanAge = function (ages) {
-    const humanAges = ages.map(
-        age => age <= 2 ? 2 * age : 16 + age * 4
-    );
-    const adults = humanAges.filter(age => age >= 18);
-    const average = adults.reduce((acc, age) => acc
-        + age, 0) / adults.length;
-    return average;
-};
-
-const calcAverageHumanAge2 = ages => ages
-    .map(age => age <= 2 ? 2 * age : 16 + age * 4)
-    .filter(age => age >= 18)
-    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
 
 // EVENT HANDLER 
 let currentAccount; // -- must be outside of the function!!
