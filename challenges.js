@@ -47,3 +47,32 @@ John and Michael's dogs eat too little!"
 */
 console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
 console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat to little!`);
+
+/* 5. Log to the console whether there is any dog eating EXACTLY the
+amount of food that is recommended (just true or false)
+*/
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+/* 6. Log to the console whether there is any dog eating an OKAY
+amount of food (just true or false)
+--> HINT: Being within a range 10% above and below the recommended portion
+means: current > (recommended * 0.9) && current < (recommended * 1.1)
+Basically, the current portion should be between 90% and 110% of the
+recommended portion.
+*/
+const checkEatingOkay = dog => dog.curFood > dog.recFood * 0.9 &&
+    dog.curFood < dog.recFood * 1.1;
+
+console.log(dogs.some(checkEatingOkay));
+
+/* 7. Create an array containing the dogs that are eating an OKAY amount
+of food (Try to re-use the condition from 6.)
+*/
+console.log(dogs.filter(checkEatingOkay));
+
+/* 8. Create a shallow copy of the dogs array and sort it by 
+recommended food portion in an ascending order (keep in mind that 
+the portions are inside the array's objects)
+*/
+const dogShallowCopy = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogShallowCopy);
