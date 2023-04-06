@@ -58,7 +58,7 @@ jessica.greet();
 */
 ///////////////////////////////////////////////////////
 // Challenge 2 from 217.
-
+/*
 class Car {
     constructor(make, speed) {
         this.make = make;
@@ -77,4 +77,89 @@ console.log(honda.speedUS);
 honda.speedUS = 50;
 console.log(honda.speedUS);
 console.log(honda);
+*/
+
+// Inheritance between "Classes": Constructor functions
+/*
+const Person = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+    Person.call(this, firstName, birthYear);
+    this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+    console.log(`My name is ${this.firstName
+        } and I study ${this.course}`);
+};
+
+const ruben = new Student('Ruben', 1980, 'Salesforce');
+ruben.introduce();
+ruben.calcAge();
+
+console.log(Student.prototype.constructor);
+Student.prototype.constructor = Student;
+console.log(Student.prototype.constructor);
+*/
+
+// 219. Coding Challenge #3
+
+const Car = function (make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+Car.prototype.accel = function () {
+    this.speed += 10;
+    console.log(`${this.make} is going ${this.speed}mph`);
+};
+Car.prototype.brake = function () {
+    this.speed -= 5;
+    console.log(`${this.make} is going ${this.speed}mph`)
+};
+
+const EV = function (make, speed, charge) {
+    Car.call(this, make, speed);
+    this.charge = charge;
+};
+
+// Where the magic happens, the secret sauce!
+EV.prototype = Object.create(Car.prototype); 
+
+EV.prototype.chargeBattery = function (chargeTo) {
+    this.charge = chargeTo;
+};
+
+EV.prototype.accel = function () {
+    this.speed += 20;
+    this.charge--;
+    console.log(`This vehicle accelerated and is going ${
+        this.speed}mph, with a charge of ${this.charge}%`);
+};
+
+EV.prototype.brake = function () {
+    this.speed -= 10;
+    this.charge--;
+    console.log(`This vehicle braked and is now going ${
+        this.speed}mph, with a charge of ${this.charge}%`);
+};
+
+const tesla = new EV("Tesla", 100, 23);
+tesla.chargeBattery(100);
+tesla.accel();
+console.log("--------------");
+tesla.brake();
+
+
+
 
