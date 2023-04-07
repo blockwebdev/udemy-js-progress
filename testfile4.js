@@ -113,7 +113,7 @@ console.log(Student.prototype.constructor);
 */
 
 // 219. Coding Challenge #3
-
+/*
 const Car = function (make, speed) {
     this.make = make;
     this.speed = speed;
@@ -159,6 +159,62 @@ tesla.chargeBattery(100);
 tesla.accel();
 console.log("--------------");
 tesla.brake();
+*/
+/////////////////////////////////////////////////////////////
+
+// Inheritance between "Classes": ES6 Classes
+
+class PersonCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+    // Instance methods
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+    greet() {
+        console.log(`Hey ${this.fullName}`);
+    }
+    get age() {
+        return 2037 - this.birthYear
+    }
+    set fullName(name) {
+        if (name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`);
+    }
+    get fullName() {
+        return this._fullName;
+    }
+    // Static method
+    static hey() {
+        console.log('Hey there!');
+    }
+}
+
+class StudentCl extends PersonCl {
+    constructor(fullName, birthYear, course) {
+        // this always needs to happen first!!!!
+        super(fullName, birthYear);
+        this.course = course;
+    }
+    introduce() {
+        console.log(`My name is ${this.fullName
+            } and I study ${this.course}`);
+    }
+    // this calcAge takes priority over PersonCl (Parent) calcAge
+    calcAge() {
+        console.log(`Im ${2037 - this.birthYear
+            } years old, but as a student I feel ${
+            2037 - this.birthYear + 10
+            } years old!`);
+    }
+}
+
+const louie = new StudentCl('Louie Anderson', 1980, 'CS');
+louie.introduce();
+console.log(`------------`)
+louie.calcAge();
 
 
 
