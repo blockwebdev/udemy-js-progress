@@ -111,7 +111,7 @@ console.log(Student.prototype.constructor);
 Student.prototype.constructor = Student;
 console.log(Student.prototype.constructor);
 */
-
+////////////////////////////////////////////////////////////
 // 219. Coding Challenge #3
 /*
 const Car = function (make, speed) {
@@ -163,7 +163,7 @@ tesla.brake();
 /////////////////////////////////////////////////////////////
 
 // Inheritance between "Classes": ES6 Classes
-
+/*
 class PersonCl {
     constructor(fullName, birthYear) {
         this.fullName = fullName;
@@ -177,11 +177,11 @@ class PersonCl {
         console.log(`Hey ${this.fullName}`);
     }
     get age() {
-        return 2037 - this.birthYear
+        return 2037 - this.birthYear;
     }
     set fullName(name) {
         if (name.includes(' ')) this._fullName = name;
-        else alert(`${name} is not a full name!`);
+        else console.log(`${name} is not a full name!`);
     }
     get fullName() {
         return this._fullName;
@@ -215,6 +215,136 @@ const louie = new StudentCl('Louie Anderson', 1980, 'CS');
 louie.introduce();
 console.log(`------------`)
 louie.calcAge();
+console.log(`------------`);
+console.log(louie.age);
+
+const bobby = new PersonCl('Bobby Fischer', 1986);
+bobby.calcAge();
+bobby.greet();
+console.log(bobby.age);
+
+const carlos = new StudentCl('Carlos', 1975, 'History');
+*/
+////////////////////////////////////////////////////////////
+/*
+class Account {
+    // 1) Public fields (instanes)
+    locale = navigator.language;
+    // 2) Private fields (instances)
+    #movements = [];
+    #pin;
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        // Protected property..
+        this.#pin = pin;
+        //this._movements = [];
+        //this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${
+            owner
+        }`);
+    }
+    // 3) Public methods
+    // Public interface..
+    getMovements() {
+        return this.#movements;
+    }
+    deposit(val) {
+        this.#movements.push(val);
+    }
+    withdraw(val) {
+        this.deposit(-val);
+    }
+    requestLoan(val) {
+        // if (this.#approveLoan(val))
+        if (this._approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Loan approved!`);
+        }
+    }
+    static helper() {
+        console.log('Helper!')
+    }
+    // Private methods
+    // #approveLoan(val) {}
+    _approveLoan(val) {
+        return true;
+    }
+}
+
+const acc1 = new Account('Jonas', 'ENG', 123);
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+console.log(acc1.getMovements());
+console.log(acc1);
+Account.helper();
+// These wont work..
+//console.log(acc1.#movements);
+//console.log(acc1.#pin);
+//console.log(acc1.#approveLoan(100));
+*/
+////////////////////////////////////////////////////////////
+
+// 227. Coding Challenge #4
+
+class CarCl {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed}mph`);
+    }
+    brake() {
+        this.speed -= 5;
+        console.log(`${this.make} is going at ${this.speed}mph`);
+        return this;
+    }
+    get speedUS() {
+        return this.speed / 1.6;
+    }
+    set speedUS(speed) {
+        this.speed = speed * 1.6;
+    }
+}
+
+class EVCl extends CarCl {
+    #charge;
+
+    constructor(make, speed, charge) {
+        super(make, speed);
+        this.#charge = charge;
+    }
+    chargeBattery(chargeTo) {
+        this.#charge = chargeTo;
+        return this;
+    }
+    accelerate() {
+        this.speed += 20;
+        this.#charge--;
+        console.log(`${this.make} is going at ${
+            this.speed}mph, with a charge of ${this.#charge}.`);
+        return this;
+    }
+    brake() {
+        this.speed -= 5;
+        console.log(`${this.make} is braking at ${this.speed}mph.`);
+    }
+};
+
+const rivian = new EVCl('Rivian', 120, 23);
+
+console.log(rivian);
+console.log(rivian
+    .accelerate()
+    .accelerate()
+    .brake()
+    .chargeBattery(100)
+);
+console.log(rivian.speedUS);
 
 
 
