@@ -6,11 +6,11 @@ import resultsView from './views/resultsView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
-
+/*
 if (module.hot) {
   module.hot.accept();
 };
-
+*/
 const controlRecipes = async function () {
   try {
     // Get hash id from search bar
@@ -23,7 +23,7 @@ const controlRecipes = async function () {
 
     // 2) Rendering recipe
     recipeView.render(model.state.recipe); // data received from loadRecipe(id)
-  
+    
   } catch (err) {
     recipeView.renderError();
   }
@@ -40,7 +40,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render results
-    resultsView.render(model.state.search.results);
+    //resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
   } catch (err) {
     console.log(err);
   };
