@@ -1,5 +1,8 @@
 # udemy-js-progress
 
+*update 8-7-2023, unfounded #text (",") within "search results preview" to the bottom left of each 
+search result window
+
 Jonas Schmedtmann Udemy/PACKT-The Complete JavaScript Course 2023: From Zero to Expert/Coursera META Full Stack,
 
 Currently using this course as a base filler along with various other study materials,
