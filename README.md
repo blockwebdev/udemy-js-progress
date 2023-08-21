@@ -1,4 +1,5 @@
 # udemy-js-progress
+*update 8-21-2023, completed DOM algorithm for updating page views within search and results.
 
 *update 8-7-2023, unfounded #text (",") within "search results preview" to the bottom left of each 
 search result window
